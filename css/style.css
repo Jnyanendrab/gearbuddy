@@ -162,7 +162,8 @@ ol {
 }
 
 /* Primary Nav */
-.primary-nav {
+.primary-nav,
+#primary-nav {
   display: flex;
   align-items: center;
   gap: 0;
@@ -217,7 +218,8 @@ ol {
     display: block;
   }
 
-  .primary-nav {
+  .primary-nav,
+  #primary-nav {
     position: absolute;
     top: 100%;
     left: 0;
@@ -231,7 +233,8 @@ ol {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .primary-nav.nav-open {
+  .primary-nav.nav-open,
+  #primary-nav.nav-open {
     display: flex;
   }
 

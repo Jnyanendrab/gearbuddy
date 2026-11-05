@@ -264,22 +264,24 @@ const initMobileNav = () => {
   const header = $('.site-header');
   if (!header) return;
 
-  const nav = $('.primary-nav', header);
+  const nav = $('#primary-nav', header) || $('nav', header);
   if (!nav) return;
 
-  // Create the hamburger button
-  const toggle = document.createElement('button');
-  toggle.className = 'nav-toggle';
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-controls', 'primary-nav');
-  toggle.setAttribute('aria-label', 'Open navigation menu');
-  toggle.innerHTML = '&#9776;'; // ☰ hamburger unicode
+  // Use existing toggle button in HTML or create one if missing
+  let toggle = $('.nav-toggle', header);
+  if (!toggle) {
+    toggle = document.createElement('button');
+    toggle.className = 'nav-toggle';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', 'primary-nav');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+    toggle.innerHTML = '<span class="hamburger">&#9776;</span>';
+    const container = header.querySelector('.container') || header;
+    container.appendChild(toggle);
+  }
 
-  // Give the nav an id for aria-controls
   nav.id = 'primary-nav';
-
-  // Insert toggle before the nav
-  header.querySelector('.container').appendChild(toggle);
+  nav.classList.add('primary-nav');
 
   /**
    * Open or close the mobile nav.
@@ -289,7 +291,6 @@ const initMobileNav = () => {
     nav.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-    toggle.innerHTML = open ? '&#10005;' : '&#9776;'; // ✕ or ☰
   };
 
   // Toggle on button click
@@ -301,7 +302,7 @@ const initMobileNav = () => {
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggle) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
       setNavOpen(false);
     }
   });
@@ -314,8 +315,8 @@ const initMobileNav = () => {
     }
   });
 
-  // Close nav when a nav link is clicked (useful for same-page anchor links)
-  $$('a', nav).forEach((link) => {
+  // Close nav when a nav link is clicked
+  $('a', nav).forEach((link) => {
     link.addEventListener('click', () => setNavOpen(false));
   });
 };
@@ -384,17 +385,24 @@ const initFaqAccordions = () => {
 
 const initActiveNavLink = () => {
   const path = window.location.pathname;
-  const navLinks = $$('.nav-list a');
+  const navLinks = $('.nav-list a');
 
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // Exact match, or path starts with href (for section index pages)
-    // but only if href is not just "/"
-    const isActive =
-      href === path ||
-      (href !== '/' && path.startsWith(href));
+    let isActive = false;
+    if (href === path) {
+      isActive = true;
+    } else if (href === '/' && (path === '' || path === '/' || path === '/index.html')) {
+      isActive = true;
+    } else if (href.startsWith('/guides/') && path.startsWith('/guides/')) {
+      isActive = true;
+    } else if (href.startsWith('/deals/') && path.startsWith('/deals/')) {
+      isActive = true;
+    } else if (href.startsWith('/about') && path.startsWith('/about')) {
+      isActive = true;
+    }
 
     if (isActive) {
       link.setAttribute('aria-current', 'page');
