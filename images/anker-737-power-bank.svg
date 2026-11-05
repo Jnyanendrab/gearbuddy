@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#f0f0f0" rx="8"/>
+  <!-- Battery body -->
+  <rect x="68" y="62" width="64" height="100" rx="8" fill="none" stroke="#888" stroke-width="2.5"/>
+  <!-- Battery positive terminal -->
+  <rect x="84" y="52" width="32" height="12" rx="4" fill="none" stroke="#888" stroke-width="2"/>
+  <!-- Battery level fill -->
+  <rect x="72" y="90" width="56" height="68" rx="5" fill="#b8e0b8"/>
+  <!-- Charge percentage lines -->
+  <line x1="78" y1="108" x2="122" y2="108" stroke="#6aaa6a" stroke-width="2"/>
+  <line x1="78" y1="120" x2="122" y2="120" stroke="#6aaa6a" stroke-width="2"/>
+  <line x1="78" y1="132" x2="122" y2="132" stroke="#6aaa6a" stroke-width="2"/>
+  <!-- Lightning bolt -->
+  <polygon points="106,66 94,88 102,88 94,110 112,84 103,84" fill="#f5a623" stroke="#c8820a" stroke-width="1"/>
+  <text x="100" y="175" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#666">Anker 737 Power Bank</text>
+</svg>
