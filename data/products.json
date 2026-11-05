@@ -14,7 +14,7 @@
       "Right-hand only design",
       "Smaller hand size may not suit large palms"
     ],
-    "image": "/images/logitech-lift.svg",
+    "image": "/images/mouse-lift.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -32,7 +32,7 @@
       "Premium price point",
       "Bulkier than travel mice"
     ],
-    "image": "/images/logitech-mx-master-3s.svg",
+    "image": "/images/mouse-mx-master.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -50,7 +50,7 @@
       "No ambient back-lighting",
       "Build quality below premium options"
     ],
-    "image": "/images/baseus-screenbar.svg",
+    "image": "/images/light-baseus.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -68,7 +68,7 @@
       "Higher price among monitor lights",
       "Requires more desk real estate for controller"
     ],
-    "image": "/images/benq-screenbar-halo.svg",
+    "image": "/images/light-benq.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -86,7 +86,7 @@
       "Heavy for a power bank",
       "Can only be charged via USB-C (no AC adapter included) [VERIFY]"
     ],
-    "image": "/images/anker-737-power-bank.svg",
+    "image": "/images/power-anker737.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -104,7 +104,7 @@
       "Drops to lower wattage when multiple ports active",
       "Warm to touch under full load"
     ],
-    "image": "/images/ugreen-nexode-100w.svg",
+    "image": "/images/power-ugreen.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -122,7 +122,7 @@
       "No numpad (75% layout)",
       "Polling rate [VERIFY exact spec]"
     ],
-    "image": "/images/keychron-k3.svg",
+    "image": "/images/keyboard-keychron.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -140,7 +140,7 @@
       "Assembly can take 30–45 minutes",
       "May need desk thickness adjustment"
     ],
-    "image": "/images/huanuo-dual-monitor-arm.svg",
+    "image": "/images/monitor-arm-huanuo.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -158,7 +158,7 @@
       "Single HDMI output limits multi-monitor use",
       "Data speeds vary by port"
     ],
-    "image": "/images/anker-8in1-hub.svg",
+    "image": "/images/hub-anker.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   },
   {
@@ -176,7 +176,7 @@
       "Clamp may not fit very thick desks",
       "Weight limit worth checking for heavy power strips [VERIFY]"
     ],
-    "image": "/images/solejazz-cable-tray.svg",
+    "image": "/images/cable-tray-solejazz.jpg",
     "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
   }
 ]
