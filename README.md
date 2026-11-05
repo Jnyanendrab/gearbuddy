@@ -14,6 +14,10 @@ GearBuddy is a lightweight, static affiliate review site focused on desk setup g
 
 ## Placeholders to Replace
 
+> **Important Note on Amazon Links:**
+> All "Check current price on Amazon" buttons across `data/products.json`, JS-rendered cards, and static fallback cards currently point to direct Amazon search URLs (e.g. `https://www.amazon.com/s?k=Logitech+Lift+Vertical+Ergonomic+Mouse`). These links are temporary placeholders without affiliate tracking tags so the site is fully functional and compliant. Before launching promotional campaigns, replace each search URL in `data/products.json` with your tagged Amazon Associates link (e.g., `https://www.amazon.com/dp/B09VPHM9V8?tag=YOUR_TAG-20`).
+
+
 Before publishing, search the codebase for each placeholder below and replace it with the real value.
 
 | Placeholder | File(s) | What to put there |
@@ -26,23 +30,22 @@ Before publishing, search the codebase for each placeholder below and replace it
 
 ---
 
-## [VERIFY] Items
+## Verification Checklist (Specs to Verify on Amazon)
 
-The following product details are marked `[VERIFY]` in the site copy and **must be confirmed on Amazon.com before publishing**. Product lines, specs, and packaging change frequently.
+The following specifications were compiled from manufacturer documentation and should be confirmed on Amazon.com before publishing, as manufacturer SKUs and bundled accessories vary:
 
-| Product | What to verify |
+| Product | Specification to Double-Check |
 |---|---|
-| **BenQ ScreenBar Halo** | Wireless remote controller: confirm it is included in-box and check model name |
-| **Anker 737 Power Bank** | Exact mAh capacity (listed as 24,000 mAh) and whether a 140W charging adapter is included or sold separately |
-| **Ugreen Nexode 100W** | Exact port configuration — confirm 3× USB-C + 1× USB-A and each port's maximum wattage |
-| **Keychron K3** | Hot-swap availability: confirm which version/SKU offers hot-swap; verify exact polling rate (listed as 1000 Hz for USB mode) |
-| **HUANUO Dual Monitor Arm** | Maximum monitor size (listed as up to 32″) and maximum weight per arm (listed as 17.6 lb / 8 kg) |
-| **Anker 8-in-1 Hub** | Exact port list and confirm 4K/30Hz HDMI spec vs. 4K/60Hz |
-| **SOLEJAZZ Cable Tray** | Adjustable width range and stated weight limit |
-
-> **Note:** Always verify every product model name and spec on Amazon.com before publishing. Product lines change frequently and listings may be updated or replaced.
-
----
+| **Logitech Lift Vertical** | Confirm weight (125 g) and hand sizing bracket (Small/Medium vs. Large) |
+| **Logitech MX Master 3S** | Confirm weight (141 g) and sensor DPI range (8,000 DPI) |
+| **Baseus Monitor Light Bar** | Confirm color temperature range (2700K–6500K) and touch dimming steps |
+| **BenQ ScreenBar Halo** | Confirm in-box wireless puck remote controller inclusion and model SKU |
+| **Anker 737 Power Bank** | Confirm 24,000 mAh rating, 140W max single-port PD 3.1 output, and whether 140W charging brick is bundled |
+| **Ugreen Nexode 100W** | Confirm exact 4-port distribution (3x USB-C + 1x USB-A) and per-port wattages |
+| **Keychron K3** | Confirm version-specific hot-swap switch availability and 1000 Hz wired polling rate |
+| **HUANUO Dual Monitor Arm** | Confirm maximum monitor size (up to 32") and weight rating (17.6 lbs per arm) |
+| **Anker 8-in-1 Hub** | Confirm 4K HDMI refresh rate (4K@30Hz vs 4K@60Hz) and exact port configuration |
+| **SOLEJAZZ Cable Tray** | Confirm desk clamp thickness compatibility (up to 2 inches) and rated load capacity |
 
 ## Running Locally
 
