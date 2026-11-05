@@ -1,12 +1,12 @@
 /**
  * GearBuddy — main.js
- * Vanilla JS, no frameworks, no external dependencies.
+ * Vanilla JS, no frameworks, zero dependencies.
  * Features:
  *   1. Product card renderer (from /data/products.json)
- *   2. Mobile nav toggle
- *   3. FAQ accordion animation
+ *   2. Mobile-first nav drawer with focus trap, outside-tap & Escape key handling
+ *   3. Accessible FAQ accordion animations
  *   4. Active nav link highlighting
- *   5. Back-to-top button
+ *   5. Mobile-friendly Back-to-Top button
  */
 
 'use strict';
@@ -32,7 +32,7 @@ const escapeHTML = (str) =>
 
 /**
  * Build an HTML string for a single product card.
- * Layout: Image left, name, Best for, pros & cons in two columns with +/- markers, button.
+ * Responsive: stacked on mobile, 2-column from 640px up.
  */
 const buildProductCard = (product) => {
   const prosHTML = (product.pros || [])
@@ -50,6 +50,7 @@ const buildProductCard = (product) => {
           src="${escapeHTML(product.image)}"
           alt="${escapeHTML(product.name)}"
           loading="lazy"
+          decoding="async"
           width="200"
           height="140"
         />
@@ -83,7 +84,7 @@ const buildProductCard = (product) => {
 };
 
 /**
- * Fallback message shown if fetch or JSON parsing fails.
+ * Fallback message if fetch fails.
  */
 const PRODUCT_FALLBACK_HTML = `
   <p class="product-load-error">
@@ -174,7 +175,7 @@ const initProductRenderer = async () => {
 };
 
 /* ==========================================================================
-   2. MOBILE NAV TOGGLE
+   2. MOBILE NAV DRAWER (WITH FOCUS TRAP & ACCESSIBILITY)
    ========================================================================== */
 
 const initMobileNav = () => {
@@ -190,7 +191,7 @@ const initMobileNav = () => {
     toggle.className = 'nav-toggle';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-controls', 'primary-nav');
-    toggle.setAttribute('aria-label', 'Open navigation menu');
+    toggle.setAttribute('aria-label', 'Toggle navigation menu');
     toggle.textContent = 'Menu';
     const container = header.querySelector('.container') || header;
     container.appendChild(toggle);
@@ -199,11 +200,23 @@ const initMobileNav = () => {
   nav.id = 'primary-nav';
   nav.classList.add('primary-nav');
 
+  const getFocusableElements = () => {
+    return [toggle, ...$$('a[href], button:not([disabled])', nav)];
+  };
+
   const setNavOpen = (open) => {
     nav.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
     toggle.textContent = open ? 'Close' : 'Menu';
+
+    if (open) {
+      // Focus first link in drawer
+      const firstLink = $('a', nav);
+      if (firstLink) firstLink.focus();
+    } else {
+      toggle.focus();
+    }
   };
 
   toggle.addEventListener('click', (e) => {
@@ -212,30 +225,55 @@ const initMobileNav = () => {
     setNavOpen(!isOpen);
   });
 
+  // Close on outside tap/click
   document.addEventListener('click', (e) => {
-    if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggle) {
       setNavOpen(false);
     }
   });
 
+  // Close on Escape key & Focus trap
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+    if (!nav.classList.contains('nav-open')) return;
+
+    if (e.key === 'Escape') {
       setNavOpen(false);
-      toggle.focus();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusables = getFocusableElements();
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
+  // Close nav when a nav link is tapped
   $$('a', nav).forEach((link) => {
-    link.addEventListener('click', () => setNavOpen(false));
+    link.addEventListener('click', () => {
+      if (nav.classList.contains('nav-open')) {
+        setNavOpen(false);
+      }
+    });
   });
 };
 
 /* ==========================================================================
-   3. FAQ ACCORDION ANIMATION
+   3. ACCESSIBLE FAQ ACCORDIONS
    ========================================================================== */
 
 const initFaqAccordions = () => {
-  const faqDetails = $$('.faq-item details');
+  const faqDetails = $$('.faq-item details, details.faq-item');
 
   faqDetails.forEach((details) => {
     const summary = $('summary', details);
@@ -264,7 +302,7 @@ const initFaqAccordions = () => {
           { height: `${from}px`, opacity: from === 0 ? 0 : 1 },
           { height: `${to}px`, opacity: to === 0 ? 0 : 1 }
         ],
-        { duration: 180, easing: 'ease-out' }
+        { duration: 160, easing: 'ease-out' }
       );
 
       anim.onfinish = () => {
@@ -324,7 +362,7 @@ const initActiveNavLink = () => {
 };
 
 /* ==========================================================================
-   5. BACK TO TOP
+   5. BACK TO TOP (TOUCH-OPTIMIZED)
    ========================================================================== */
 
 const initBackToTop = () => {
@@ -334,7 +372,7 @@ const initBackToTop = () => {
   btn.textContent = 'Back to top';
   document.body.appendChild(btn);
 
-  const SCROLL_THRESHOLD = 400;
+  const SCROLL_THRESHOLD = 450;
 
   const handleScroll = () => {
     const shouldShow = window.scrollY > SCROLL_THRESHOLD;
