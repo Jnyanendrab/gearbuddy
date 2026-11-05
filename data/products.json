@@ -1,0 +1,182 @@
+[
+  {
+    "id": "logitech-lift",
+    "name": "Logitech Lift Vertical Ergonomic Mouse",
+    "category": "ergonomic-mouse",
+    "bestFor": "Users with wrist or arm fatigue who want an ergonomic grip upgrade",
+    "pros": [
+      "Natural 57° vertical grip reduces forearm pronation",
+      "Silent click option available",
+      "Works on most surfaces including glass",
+      "Multi-device Bluetooth + USB receiver"
+    ],
+    "cons": [
+      "Right-hand only design",
+      "Smaller hand size may not suit large palms"
+    ],
+    "image": "/images/logitech-lift.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "logitech-mx-master-3s",
+    "name": "Logitech MX Master 3S",
+    "category": "ergonomic-mouse",
+    "bestFor": "Power users and content creators who need precision and programmable buttons",
+    "pros": [
+      "8,000 DPI sensor works on glass",
+      "MagSpeed electromagnetic scroll wheel",
+      "Customizable via Logi Options+ software",
+      "USB-C charging, long battery life"
+    ],
+    "cons": [
+      "Premium price point",
+      "Bulkier than travel mice"
+    ],
+    "image": "/images/logitech-mx-master-3s.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "baseus-screenbar",
+    "name": "Baseus Monitor Light Bar",
+    "category": "monitor-light",
+    "bestFor": "Budget-conscious users who want monitor-mounted task lighting without glare",
+    "pros": [
+      "Asymmetric light reduces screen glare",
+      "USB-powered, no extra outlet needed",
+      "Touch controls on the bar",
+      "Compact and easy to install"
+    ],
+    "cons": [
+      "No ambient back-lighting",
+      "Build quality below premium options"
+    ],
+    "image": "/images/baseus-screenbar.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "benq-screenbar-halo",
+    "name": "BenQ ScreenBar Halo",
+    "category": "monitor-light",
+    "bestFor": "Professionals wanting front and back lighting with auto-dimming",
+    "pros": [
+      "Front task light + rear halo glow",
+      "Auto-dimming and color temperature sensor",
+      "Wireless remote controller included [VERIFY model details]",
+      "Premium build quality"
+    ],
+    "cons": [
+      "Higher price among monitor lights",
+      "Requires more desk real estate for controller"
+    ],
+    "image": "/images/benq-screenbar-halo.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "anker-737-power-bank",
+    "name": "Anker 737 Power Bank (PowerCore 24K)",
+    "category": "power-bank",
+    "bestFor": "Travelers and remote workers who need high-capacity, fast-charging power",
+    "pros": [
+      "140W max output for laptops",
+      "24,000 mAh capacity [VERIFY exact spec]",
+      "Smart display showing battery % and wattage",
+      "USB-C bidirectional charging"
+    ],
+    "cons": [
+      "Heavy for a power bank",
+      "Can only be charged via USB-C (no AC adapter included) [VERIFY]"
+    ],
+    "image": "/images/anker-737-power-bank.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "ugreen-nexode-100w",
+    "name": "Ugreen Nexode 100W GaN Charger",
+    "category": "gan-charger",
+    "bestFor": "Multi-device users who want a single compact charger for laptop + phone + tablet",
+    "pros": [
+      "4 ports (3x USB-C, 1x USB-A) [VERIFY exact port config]",
+      "GaN II technology runs cooler than silicon",
+      "100W single-port or distributed across devices",
+      "Compact relative to wattage"
+    ],
+    "cons": [
+      "Drops to lower wattage when multiple ports active",
+      "Warm to touch under full load"
+    ],
+    "image": "/images/ugreen-nexode-100w.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "keychron-k3",
+    "name": "Keychron K3 Low-Profile Mechanical Keyboard",
+    "category": "keyboard",
+    "bestFor": "Mac and Windows users wanting a slim, wireless mechanical keyboard for a clean desk",
+    "pros": [
+      "Hot-swappable switches (on some versions) [VERIFY]",
+      "Bluetooth 5.1 + wired USB-C",
+      "Low-profile Keychron switches keep desktop height minimal",
+      "RGB backlight with multiple modes"
+    ],
+    "cons": [
+      "No numpad (75% layout)",
+      "Polling rate [VERIFY exact spec]"
+    ],
+    "image": "/images/keychron-k3.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "huanuo-dual-monitor-arm",
+    "name": "HUANUO Dual Monitor Arm",
+    "category": "monitor-arm",
+    "bestFor": "Dual-monitor setups that need flexible positioning and a cleaner desk surface",
+    "pros": [
+      "Supports monitors up to 32\" and 17.6 lbs each [VERIFY]",
+      "Full range of motion: tilt, swivel, rotate",
+      "Cable management channels built in",
+      "Clamp or grommet mounting options"
+    ],
+    "cons": [
+      "Assembly can take 30–45 minutes",
+      "May need desk thickness adjustment"
+    ],
+    "image": "/images/huanuo-dual-monitor-arm.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "anker-8in1-hub",
+    "name": "Anker 8-in-1 USB-C Hub",
+    "category": "usb-hub",
+    "bestFor": "Laptop users who need to expand ports without cluttering the desk",
+    "pros": [
+      "8 ports: HDMI, USB-A, USB-C PD, SD/microSD, Ethernet [VERIFY exact ports]",
+      "4K HDMI output [VERIFY resolution spec]",
+      "60W Power Delivery passthrough",
+      "Compact, pocket-sized form factor"
+    ],
+    "cons": [
+      "Single HDMI output limits multi-monitor use",
+      "Data speeds vary by port"
+    ],
+    "image": "/images/anker-8in1-hub.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  },
+  {
+    "id": "solejazz-cable-tray",
+    "name": "SOLEJAZZ Under-Desk Cable Management Tray",
+    "category": "cable-management",
+    "bestFor": "Anyone wanting to hide power strips and cables under the desk cleanly",
+    "pros": [
+      "No-drill clamp mounting fits most desks",
+      "Holds power strip + multiple cable runs",
+      "Metal mesh construction is durable",
+      "Adjustable width [VERIFY]"
+    ],
+    "cons": [
+      "Clamp may not fit very thick desks",
+      "Weight limit worth checking for heavy power strips [VERIFY]"
+    ],
+    "image": "/images/solejazz-cable-tray.svg",
+    "affiliateUrl": "REPLACE_WITH_MY_AFFILIATE_LINK"
+  }
+]
