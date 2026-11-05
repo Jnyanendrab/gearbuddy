@@ -22,7 +22,6 @@ Before publishing, search the codebase for each placeholder below and replace it
 
 | Placeholder | File(s) | What to put there |
 |---|---|---|
-| `REPLACE_WITH_MY_AFFILIATE_LINK` | `/data/products.json` (all 10 entries) | Your Amazon Associates affiliate link for each product |
 | `REPLACE_WITH_GSC_CODE` | `/index.html` `<head>` | Your Google Search Console verification meta tag content value |
 | `REPLACE_WITH_MY_EMAIL` | `/contact.html` | Your actual contact email address |
 | `REPLACE_WITH_WEB3FORMS_KEY` | `/contact.html` | Your Web3Forms access key (get a free key at [web3forms.com](https://web3forms.com)) |
@@ -165,7 +164,7 @@ gearbuddy/
 - [ ] `REPLACE_WITH_MY_EMAIL` replaced in `contact.html`
 - [ ] `REPLACE_WITH_WEB3FORMS_KEY` replaced in `contact.html`
 - [ ] Cloudflare Web Analytics snippet added to every HTML file
-- [ ] All `[VERIFY]` product specs confirmed on Amazon.com
+- [ ] All product specs in the verification checklist confirmed on Amazon.com
 - [ ] `sitemap.xml` submitted to Google Search Console
 - [ ] Custom domain connected and TLS certificate active
 - [ ] 404 page working correctly on Cloudflare Pages

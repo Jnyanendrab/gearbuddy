@@ -1739,3 +1739,9 @@ figure.guide-figure img {
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+.contact-privacy-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
