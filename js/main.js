@@ -15,28 +15,9 @@
    UTILITY HELPERS
    ========================================================================== */
 
-/**
- * Shorthand for document.querySelector
- * @param {string} selector
- * @param {Element} [scope=document]
- * @returns {Element|null}
- */
 const $ = (selector, scope = document) => scope.querySelector(selector);
+const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-/**
- * Shorthand for document.querySelectorAll → Array
- * @param {string} selector
- * @param {Element} [scope=document]
- * @returns {Element[]}
- */
-const $$ = (selector, scope = document) =>
-  Array.from(scope.querySelectorAll(selector));
-
-/**
- * Escape HTML to prevent XSS when inserting untrusted data into the DOM.
- * @param {string} str
- * @returns {string}
- */
 const escapeHTML = (str) =>
   String(str)
     .replace(/&/g, '&amp;')
@@ -45,15 +26,13 @@ const escapeHTML = (str) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
-
 /* ==========================================================================
    1. PRODUCT CARD RENDERER
    ========================================================================== */
 
 /**
  * Build an HTML string for a single product card.
- * @param {Object} product - Product data from products.json
- * @returns {string} HTML string
+ * Layout: Image left, name, Best for, pros & cons in two columns with +/- markers, button.
  */
 const buildProductCard = (product) => {
   const prosHTML = (product.pros || [])
@@ -66,85 +45,45 @@ const buildProductCard = (product) => {
 
   return `
     <article class="product-card" data-product-id="${escapeHTML(product.id)}">
-      <img
-        src="${escapeHTML(product.image)}"
-        alt="${escapeHTML(product.name)}"
-        loading="lazy"
-        width="280"
-        height="180"
-      />
-      <h3>${escapeHTML(product.name)}</h3>
-      <p class="best-for">Best for: ${escapeHTML(product.bestFor)}</p>
-      <div class="pros-cons">
-        <div>
-          <h4>Pros</h4>
-          <ul class="pros-list">${prosHTML}</ul>
+      <div class="product-card-media">
+        <img
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.name)}"
+          loading="lazy"
+          width="200"
+          height="140"
+        />
+      </div>
+      <div class="product-card-body">
+        <h3>${escapeHTML(product.name)}</h3>
+        <p class="best-for">Best for: ${escapeHTML(product.bestFor)}</p>
+        <div class="pros-cons">
+          <div>
+            <h4>Pros</h4>
+            <ul class="pros-list">${prosHTML}</ul>
+          </div>
+          <div>
+            <h4>Cons</h4>
+            <ul class="cons-list">${consHTML}</ul>
+          </div>
         </div>
-        <div>
-          <h4>Cons</h4>
-          <ul class="cons-list">${consHTML}</ul>
+        <div class="product-card-actions">
+          <a
+            href="${escapeHTML(product.affiliateUrl)}"
+            class="cta-button"
+            rel="sponsored nofollow noopener"
+            target="_blank"
+          >
+            Check current price on Amazon
+          </a>
         </div>
       </div>
-      <a
-        href="${escapeHTML(product.affiliateUrl)}"
-        class="cta-button"
-        rel="sponsored nofollow noopener"
-        target="_blank"
-      >
-        Check current price on Amazon
-      </a>
     </article>
   `.trim();
 };
 
 /**
- * Build an HTML string for a single-product detail card (larger layout).
- * @param {Object} product
- * @returns {string}
- */
-const buildSingleProductCard = (product) => {
-  const prosHTML = (product.pros || [])
-    .map((pro) => `<li>${escapeHTML(pro)}</li>`)
-    .join('');
-
-  const consHTML = (product.cons || [])
-    .map((con) => `<li>${escapeHTML(con)}</li>`)
-    .join('');
-
-  return `
-    <img
-      src="${escapeHTML(product.image)}"
-      alt="${escapeHTML(product.name)}"
-      loading="lazy"
-      width="400"
-      height="220"
-    />
-    <h2>${escapeHTML(product.name)}</h2>
-    <p class="best-for">Best for: ${escapeHTML(product.bestFor)}</p>
-    <div class="pros-cons">
-      <div>
-        <h4>Pros</h4>
-        <ul class="pros-list">${prosHTML}</ul>
-      </div>
-      <div>
-        <h4>Cons</h4>
-        <ul class="cons-list">${consHTML}</ul>
-      </div>
-    </div>
-    <a
-      href="${escapeHTML(product.affiliateUrl)}"
-      class="cta-button"
-      rel="sponsored nofollow noopener"
-      target="_blank"
-    >
-      Check current price on Amazon
-    </a>
-  `.trim();
-};
-
-/**
  * Fallback message shown if fetch or JSON parsing fails.
- * @returns {string}
  */
 const PRODUCT_FALLBACK_HTML = `
   <p class="product-load-error">
@@ -153,10 +92,6 @@ const PRODUCT_FALLBACK_HTML = `
   </p>
 `.trim();
 
-/**
- * Fetch product data once and cache it in a module-level promise.
- * This prevents duplicate network requests if multiple grids are on the page.
- */
 let _productDataPromise = null;
 
 const fetchProducts = () => {
@@ -168,19 +103,13 @@ const fetchProducts = () => {
       })
       .catch((err) => {
         console.warn('[GearBuddy] Could not load products.json:', err);
-        // Reset so a future call can retry
         _productDataPromise = null;
-        return null; // signal failure without throwing
+        return null;
       });
   }
   return _productDataPromise;
 };
 
-/**
- * Render product grid(s) for elements with [data-product-ids].
- * Looks for an #product-grid child or uses the element itself.
- * @param {Object[]} allProducts
- */
 const renderProductGrids = (allProducts) => {
   const gridHosts = $$('[data-product-ids]');
 
@@ -194,7 +123,6 @@ const renderProductGrids = (allProducts) => {
       .map((id) => allProducts.find((p) => p.id === id))
       .filter(Boolean);
 
-    // Find or create the grid container
     const grid = $('#product-grid', host) || host;
 
     if (matched.length === 0) {
@@ -206,11 +134,6 @@ const renderProductGrids = (allProducts) => {
   });
 };
 
-/**
- * Render single-product detail cards for elements with .single-product-card
- * and [data-product-id].
- * @param {Object[]} allProducts
- */
 const renderSingleProductCards = (allProducts) => {
   const cards = $$('.single-product-card[data-product-id]');
 
@@ -223,24 +146,19 @@ const renderSingleProductCards = (allProducts) => {
       return;
     }
 
-    card.innerHTML = buildSingleProductCard(product);
+    card.innerHTML = buildProductCard(product);
   });
 };
 
-/**
- * Main entry point for the product renderer.
- * Runs only when there are product containers on the current page.
- */
 const initProductRenderer = async () => {
   const hasGrids = $$('[data-product-ids]').length > 0;
   const hasSingleCards = $$('.single-product-card[data-product-id]').length > 0;
 
-  if (!hasGrids && !hasSingleCards) return; // nothing to render
+  if (!hasGrids && !hasSingleCards) return;
 
   const products = await fetchProducts();
 
   if (!products) {
-    // Fetch failed — show fallback in every container
     $$('[data-product-ids]').forEach((host) => {
       const grid = $('#product-grid', host) || host;
       grid.innerHTML = PRODUCT_FALLBACK_HTML;
@@ -255,7 +173,6 @@ const initProductRenderer = async () => {
   if (hasSingleCards) renderSingleProductCards(products);
 };
 
-
 /* ==========================================================================
    2. MOBILE NAV TOGGLE
    ========================================================================== */
@@ -267,7 +184,6 @@ const initMobileNav = () => {
   const nav = $('#primary-nav', header) || $('nav', header);
   if (!nav) return;
 
-  // Use existing toggle button in HTML or create one if missing
   let toggle = $('.nav-toggle', header);
   if (!toggle) {
     toggle = document.createElement('button');
@@ -275,7 +191,7 @@ const initMobileNav = () => {
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-controls', 'primary-nav');
     toggle.setAttribute('aria-label', 'Open navigation menu');
-    toggle.innerHTML = '<span class="hamburger">&#9776;</span>';
+    toggle.textContent = 'Menu';
     const container = header.querySelector('.container') || header;
     container.appendChild(toggle);
   }
@@ -283,31 +199,25 @@ const initMobileNav = () => {
   nav.id = 'primary-nav';
   nav.classList.add('primary-nav');
 
-  /**
-   * Open or close the mobile nav.
-   * @param {boolean} open
-   */
   const setNavOpen = (open) => {
     nav.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    toggle.textContent = open ? 'Close' : 'Menu';
   };
 
-  // Toggle on button click
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = nav.classList.contains('nav-open');
     setNavOpen(!isOpen);
   });
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
       setNavOpen(false);
     }
   });
 
-  // Close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
       setNavOpen(false);
@@ -315,12 +225,10 @@ const initMobileNav = () => {
     }
   });
 
-  // Close nav when a nav link is clicked
-  $('a', nav).forEach((link) => {
+  $$('a', nav).forEach((link) => {
     link.addEventListener('click', () => setNavOpen(false));
   });
 };
-
 
 /* ==========================================================================
    3. FAQ ACCORDION ANIMATION
@@ -331,29 +239,35 @@ const initFaqAccordions = () => {
 
   faqDetails.forEach((details) => {
     const summary = $('summary', details);
-    const answer = details.querySelector('.faq-answer') || (() => {
-      // Wrap content that isn't the summary into .faq-answer if not already wrapped
+    if (!summary) return;
+
+    let answer = details.querySelector('.faq-answer');
+    if (!answer) {
       const wrapper = document.createElement('div');
       wrapper.className = 'faq-answer';
       Array.from(details.childNodes).forEach((node) => {
         if (node !== summary) wrapper.appendChild(node);
       });
       details.appendChild(wrapper);
-      return wrapper;
-    })();
+      answer = wrapper;
+    }
 
-    // Smooth height animation via Web Animations API (if supported)
     const animateHeight = (from, to, onComplete) => {
       if (!answer.animate) {
-        // Fallback: no animation
         onComplete?.();
         return;
       }
-      answer.animate(
-        [{ height: `${from}px`, overflow: 'hidden' }, { height: `${to}px`, overflow: 'hidden' }],
-        { duration: 220, easing: 'ease', fill: 'both' }
-      ).onfinish = () => {
-        answer.style.height = '';
+
+      answer.style.overflow = 'hidden';
+      const anim = answer.animate(
+        [
+          { height: `${from}px`, opacity: from === 0 ? 0 : 1 },
+          { height: `${to}px`, opacity: to === 0 ? 0 : 1 }
+        ],
+        { duration: 180, easing: 'ease-out' }
+      );
+
+      anim.onfinish = () => {
         answer.style.overflow = '';
         onComplete?.();
       };
@@ -363,13 +277,11 @@ const initFaqAccordions = () => {
       e.preventDefault();
 
       if (details.open) {
-        // Closing
         const startHeight = answer.scrollHeight;
         animateHeight(startHeight, 0, () => {
           details.open = false;
         });
       } else {
-        // Opening
         details.open = true;
         const endHeight = answer.scrollHeight;
         animateHeight(0, endHeight);
@@ -378,14 +290,13 @@ const initFaqAccordions = () => {
   });
 };
 
-
 /* ==========================================================================
    4. ACTIVE NAV LINK
    ========================================================================== */
 
 const initActiveNavLink = () => {
   const path = window.location.pathname;
-  const navLinks = $('.nav-list a');
+  const navLinks = $$('.nav-list a');
 
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');
@@ -412,20 +323,17 @@ const initActiveNavLink = () => {
   });
 };
 
-
 /* ==========================================================================
    5. BACK TO TOP
    ========================================================================== */
 
 const initBackToTop = () => {
-  // Create the button
   const btn = document.createElement('button');
   btn.id = 'back-to-top';
   btn.setAttribute('aria-label', 'Back to top');
-  btn.innerHTML = '&#8679;'; // ↑ arrow
+  btn.textContent = 'Back to top';
   document.body.appendChild(btn);
 
-  // Show/hide based on scroll position
   const SCROLL_THRESHOLD = 400;
 
   const handleScroll = () => {
@@ -433,33 +341,21 @@ const initBackToTop = () => {
     btn.classList.toggle('visible', shouldShow);
   };
 
-  // Use passive listener for performance
   window.addEventListener('scroll', handleScroll, { passive: true });
 
-  // Smooth scroll to top on click
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 };
 
-
 /* ==========================================================================
-   INIT — DOMContentLoaded
+   INIT
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Product cards (async, non-blocking)
   initProductRenderer();
-
-  // 2. Mobile nav
   initMobileNav();
-
-  // 3. FAQ accordions
   initFaqAccordions();
-
-  // 4. Active nav link
   initActiveNavLink();
-
-  // 5. Back to top button
   initBackToTop();
 });

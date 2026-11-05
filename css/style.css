@@ -1,236 +1,358 @@
+/**
+ * GearBuddy — style.css
+ * Desk Mat Design Direction
+ * Clean, modern, accessible, zero external dependencies.
+ */
+
 /* ==========================================================================
-   GearBuddy — style.css
-   Mobile-first, CSS custom properties, light/dark mode
+   1. FONTS & SELF-HOSTED @FONT-FACE
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. CUSTOM PROPERTIES — Light Mode (default)
-   -------------------------------------------------------------------------- */
-:root {
-  --bg:                #f8f9fa;
-  --surface:           #ffffff;
-  --text:              #1a1a2e;
-  --text-muted:        #6c757d;
-  --accent:            #2563eb;
-  --accent-hover:      #1d4ed8;
-  --border:            #dee2e6;
-  --disclosure-bg:     #fff3cd;
-  --disclosure-border: #ffc107;
-  --disclosure-text:   #664d03;
-  --card-shadow:       0 2px 8px rgba(0, 0, 0, 0.08);
-
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                 Helvetica, Arial, sans-serif;
-
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-
-  --transition-speed: 0.2s;
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-grotesque-700.woff2') format('woff2');
 }
 
-/* --------------------------------------------------------------------------
-   2. CUSTOM PROPERTIES — Dark Mode Override
-   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/atkinson-hyperlegible-400-italic.woff2') format('woff2');
+}
+
+/* ==========================================================================
+   2. DESIGN TOKENS & COLOR PALETTE
+   ========================================================================== */
+
+:root {
+  /* Palette (Light) */
+  --bg: #EEF1F4;
+  --text: #1B2430;
+  --surface: #FFFFFF;
+  --felt: #1F3347;
+  --teal: #0B6E75;
+  --teal-hover: #085257;
+  --teal-active: #063d41;
+  --amber: #F2B33D;
+
+  /* Neutral scale */
+  --border: #D5DDE4;
+  --border-strong: #B0BECB;
+  --text-muted: #4B5A6B;
+  --disclosure-bg: #E4EAF0;
+  --disclosure-border: #CBD5E1;
+  --disclosure-text: #1E2D3D;
+
+  /* Focus outline */
+  --focus-ring: #0B6E75;
+
+  /* Typography */
+  --font-heading: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --max-text-width: 68ch;
+
+  /* Sizing & Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --container-max: 1120px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:                #0f172a;
-    --surface:           #1e293b;
-    --text:              #e2e8f0;
-    --text-muted:        #94a3b8;
-    --accent:            #60a5fa;
-    --accent-hover:      #93c5fd;
-    --border:            #334155;
-    --disclosure-bg:     #3d2e00;
-    --disclosure-border: #ca8a04;
-    --disclosure-text:   #fde68a;
-    --card-shadow:       0 2px 8px rgba(0, 0, 0, 0.4);
+    /* Palette (Dark) */
+    --bg: #14202B;
+    --text: #E8EDF2;
+    --surface: #1C2C3A;
+    --felt: #0F1A24;
+    --teal: #4FB8C0;
+    --teal-hover: #6EC6CD;
+    --teal-active: #8CD6DC;
+    --amber: #F2B33D;
+
+    /* Neutral scale */
+    --border: #2B3D4F;
+    --border-strong: #3D556C;
+    --text-muted: #9BB0C1;
+    --disclosure-bg: #182736;
+    --disclosure-border: #2C4054;
+    --disclosure-text: #D2DFEB;
+
+    /* Focus outline */
+    --focus-ring: #4FB8C0;
   }
 }
 
-/* --------------------------------------------------------------------------
-   3. CSS RESET / BASE
-   -------------------------------------------------------------------------- */
-*,
-*::before,
-*::after {
+/* ==========================================================================
+   3. RESET & BASE STYLES
+   ========================================================================== */
+
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html {
+  font-size: 18px;
+  line-height: 1.6;
   scroll-behavior: smooth;
-  font-size: 16px;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
   line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
+/* Sentence-case headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  text-transform: none; /* No all-caps */
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw + 1rem, 2.75rem);
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.5vw + 0.5rem, 1.85rem);
+  letter-spacing: -0.015em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+p, ul, ol, dl, table, blockquote {
+  margin-bottom: 1.25rem;
+  max-width: var(--max-text-width);
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
 }
 
 a {
-  color: var(--accent);
+  color: var(--teal);
   text-decoration: underline;
-  transition: color var(--transition-speed) ease;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--teal-hover);
 }
 
-ul,
-ol {
-  list-style: none;
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-/* --------------------------------------------------------------------------
-   4. SKIP LINK
-   -------------------------------------------------------------------------- */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 1rem;
-  z-index: 999;
-  background: var(--accent);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  font-weight: 600;
-  text-decoration: none;
-  transition: top 0.15s ease;
-}
-
-.skip-link:focus {
-  top: 0;
-  outline: 3px solid var(--accent-hover);
+/* Accessible focus state */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
-/* --------------------------------------------------------------------------
-   5. LAYOUT — .container
-   -------------------------------------------------------------------------- */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1rem;
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--felt);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
-/* --------------------------------------------------------------------------
-   6. STICKY HEADER
-   -------------------------------------------------------------------------- */
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* ==========================================================================
+   4. HEADER & NAVIGATION
+   ========================================================================== */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--surface);
+  background-color: var(--surface);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  min-height: 64px;
 }
 
-.site-header .container {
+.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  min-height: 64px;
+  gap: 1.5rem;
 }
 
-/* Logo */
 .site-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
   text-decoration: none;
   letter-spacing: -0.02em;
-  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .site-logo:hover {
-  color: var(--accent-hover);
+  color: var(--teal);
 }
 
-/* Primary Nav */
 .primary-nav,
 #primary-nav {
   display: flex;
   align-items: center;
-  gap: 0;
 }
 
 .nav-list {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  flex-wrap: wrap;
+  list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-list a {
-  display: inline-block;
-  padding: 0.4rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.85rem;
+  min-height: 44px;
+  min-width: 44px;
   color: var(--text);
   text-decoration: none;
-  font-size: 0.925rem;
-  font-weight: 500;
-  border-radius: var(--radius-md);
-  transition: background var(--transition-speed) ease,
-              color var(--transition-speed) ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.nav-list a:hover,
+.nav-list a:hover {
+  background-color: var(--bg);
+  color: var(--teal);
+}
+
 .nav-list a[aria-current="page"] {
-  background: var(--accent);
-  color: #fff;
+  background-color: var(--felt);
+  color: #FFFFFF;
 }
 
-/* Hamburger toggle (shown mobile) */
+@media (prefers-color-scheme: dark) {
+  .nav-list a[aria-current="page"] {
+    background-color: #243B50;
+    color: #FFFFFF;
+  }
+}
+
+/* Mobile nav hamburger */
 .nav-toggle {
   display: none;
-  background: none;
+  background: transparent;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.4rem 0.6rem;
-  cursor: pointer;
+  border-radius: var(--radius-sm);
   color: var(--text);
-  font-size: 1.2rem;
-  line-height: 1;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav-toggle:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Mobile nav */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .nav-toggle {
-    display: block;
+    display: inline-flex;
   }
 
   .primary-nav,
   #primary-nav {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--surface);
+    background-color: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 0.75rem 1rem 1rem;
-    display: none;
+    padding: 1rem 1.25rem;
     flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: stretch;
   }
 
   .primary-nav.nav-open,
@@ -240,398 +362,718 @@ ol {
 
   .nav-list {
     flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    align-items: stretch;
     gap: 0.25rem;
   }
 
   .nav-list a {
     width: 100%;
-    padding: 0.6rem 0.75rem;
+    padding: 0.75rem 1rem;
   }
 }
 
-/* --------------------------------------------------------------------------
-   7. HERO SECTION (Homepage)
-   -------------------------------------------------------------------------- */
-.hero {
-  text-align: center;
-  padding: 3rem 1rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
+/* ==========================================================================
+   5. DISCLOSURE STRIP (DIRECTLY BELOW HEADER)
+   ========================================================================== */
 
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.75rem;
-  color: var(--text);
-}
-
-.hero .tagline {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--text-muted);
-  max-width: 600px;
-  margin: 0 auto 1rem;
-}
-
-/* Hero badges */
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-/* --------------------------------------------------------------------------
-   8. BADGE
-   -------------------------------------------------------------------------- */
-.badge {
-  display: inline-block;
-  background: var(--accent);
-  color: #fff;
-  border-radius: var(--radius-sm);
-  padding: 2px 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  vertical-align: middle;
-}
-
-/* --------------------------------------------------------------------------
-   9. PAGE INTRO
-   -------------------------------------------------------------------------- */
-.page-intro {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.page-intro h1 {
-  font-size: clamp(1.6rem, 4vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.page-intro p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-}
-
-/* --------------------------------------------------------------------------
-   10. DISCLOSURE BOX
-   -------------------------------------------------------------------------- */
-.disclosure-box {
-  background: var(--disclosure-bg);
-  border-left: 4px solid var(--disclosure-border);
-  border-radius: var(--radius-sm);
+.disclosure-strip {
+  width: 100%;
+  background-color: var(--disclosure-bg);
+  border-bottom: 1px solid var(--disclosure-border);
   color: var(--disclosure-text);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  padding: 0.55rem 0;
 }
 
-.disclosure-box strong {
-  font-weight: 700;
-}
-
-/* --------------------------------------------------------------------------
-   11. PRODUCT GRID & CARDS
-   -------------------------------------------------------------------------- */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.product-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--card-shadow);
+.disclosure-inner {
   display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
-  transition: box-shadow var(--transition-speed) ease,
-              transform var(--transition-speed) ease;
+  align-items: center;
+  gap: 0.65rem;
 }
 
-.product-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+.disclosure-inner p {
+  margin: 0;
+  max-width: none;
+}
+
+.disclosure-info-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  line-height: 1;
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+/* Legacy inner disclosure box fallback */
+.disclosure-box {
+  background-color: var(--disclosure-bg);
+  border: 1px solid var(--disclosure-border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--disclosure-text);
+  font-size: 0.9rem;
+}
+
+.disclosure-box p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. RULER TICK-MARK DIVIDER (CSS ONLY)
+   ========================================================================== */
+
+.ruler-divider {
+  display: block;
+  width: 100%;
+  height: 12px;
+  margin: 2.75rem 0;
+  border-top: 1px solid var(--border);
+  background-image:
+    repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(90deg, var(--border-strong) 0, var(--border-strong) 1.5px, transparent 1.5px, transparent 50px);
+  background-size: 100% 6px, 100% 12px;
+  background-position: left top, left top;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   7. BUTTONS & CTAS
+   ========================================================================== */
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.65rem 1.4rem;
+  background-color: var(--teal);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-transform: none; /* Sentence case */
+}
+
+.cta-button:hover {
+  background-color: var(--teal-hover);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.cta-button:active {
+  background-color: var(--teal-active);
 }
 
 @media (prefers-color-scheme: dark) {
-  .product-card:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  .cta-button {
+    background-color: var(--teal);
+    color: #0F1A24;
+    font-weight: 700;
+  }
+  .cta-button:hover {
+    background-color: var(--teal-hover);
+    color: #0F1A24;
   }
 }
 
-.product-card img {
-  width: 100%;
-  max-height: 180px;
-  object-fit: contain;
-  margin-bottom: 1rem;
+.cta-button-secondary {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.cta-button-secondary:hover {
+  background-color: var(--surface);
+  color: var(--teal);
+}
+
+/* ==========================================================================
+   8. HOMEPAGE HERO (DESK MAT ILLUSTRATION & LIGHT GLOW)
+   ========================================================================== */
+
+.hero {
+  padding: 3rem 0 2rem;
+  background-color: var(--bg);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-content {
+  text-align: left;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.25rem 0.65rem;
   border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  text-transform: none;
+}
+
+.hero-title {
+  font-size: clamp(2.1rem, 4vw + 0.5rem, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.hero-intro {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 52ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Desk illustration container */
+.hero-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.desk-svg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Monitor light bar glow animation */
+@keyframes lightBarGlowIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.92);
+  }
+  to {
+    opacity: 0.9;
+    transform: scaleY(1);
+  }
+}
+
+.desk-light-glow {
+  transform-origin: top center;
+  animation: lightBarGlowIn 1.4s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk-light-glow {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-illustration {
+    order: -1;
+    max-width: 440px;
+  }
+}
+
+/* ==========================================================================
+   9. PROBLEM-BASED LIST (HOMEPAGE FIXES)
+   ========================================================================== */
+
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 1.5rem 0 2rem;
+  list-style: none;
+  padding: 0;
+  max-width: none;
+}
+
+.problem-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 1.35rem;
+  min-height: 64px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.problem-row:hover {
+  border-color: var(--teal);
+  background-color: var(--surface);
+}
+
+.problem-meta {
+  flex: 1;
+}
+
+.problem-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.25rem 0;
+  text-transform: none;
+}
+
+.problem-row:hover .problem-title {
+  color: var(--teal);
+}
+
+.problem-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+  max-width: none;
+}
+
+.problem-action {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--teal);
+  flex-shrink: 0;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg);
+}
+
+@media (max-width: 600px) {
+  .problem-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .problem-action {
+    align-self: flex-start;
+  }
+}
+
+/* ==========================================================================
+   10. PRODUCT CARDS (IMAGE LEFT, 1PX BORDER, NO SHADOW, + / - MARKERS)
+   ========================================================================== */
+
+.product-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  max-width: none;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  box-shadow: none; /* No shadow */
+  align-items: start;
+}
+
+.product-card-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  min-height: 160px;
+}
+
+.product-card-media img {
+  max-height: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .product-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+  text-transform: none;
 }
 
 .best-for {
-  font-style: italic;
+  font-size: 0.92rem;
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  font-size: 0.9rem;
-}
-
-/* --------------------------------------------------------------------------
-   12. PROS / CONS
-   -------------------------------------------------------------------------- */
-.pros-cons {
   margin-bottom: 1rem;
-  font-size: 0.875rem;
+  line-height: 1.45;
 }
 
-@media (min-width: 480px) {
-  .pros-cons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 1rem;
-  }
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .pros-cons h4 {
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.4rem;
   color: var(--text-muted);
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  text-transform: none;
 }
 
 .pros-list,
 .cons-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
-.pros-list li {
-  color: #15803d; /* green-700 */
+.pros-list li,
+.cons-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .pros-list li::before {
-  content: "✓ ";
+  content: "+";
+  position: absolute;
+  left: 0;
   font-weight: 700;
-  color: #16a34a; /* green-600 */
-}
-
-.cons-list li {
-  color: #b91c1c; /* red-700 */
+  color: var(--teal);
+  font-family: monospace;
 }
 
 .cons-list li::before {
-  content: "✗ ";
+  content: "-";
+  position: absolute;
+  left: 0;
   font-weight: 700;
-  color: #dc2626; /* red-600 */
+  color: var(--text-muted);
+  font-family: monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  .pros-list li { color: #86efac; } /* green-300 */
-  .pros-list li::before { color: #4ade80; } /* green-400 */
-  .cons-list li { color: #fca5a5; } /* red-300 */
-  .cons-list li::before { color: #f87171; } /* red-400 */
-}
-
-/* --------------------------------------------------------------------------
-   13. CTA BUTTON
-   -------------------------------------------------------------------------- */
-.cta-button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: var(--accent);
-  color: #fff !important;
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
+.product-card-actions {
   margin-top: auto;
-  transition: background var(--transition-speed) ease,
-              transform 0.1s ease;
+  padding-top: 0.75rem;
 }
 
-.cta-button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+@media (max-width: 680px) {
+  .product-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .pros-cons {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .product-card .cta-button {
+    width: 100%;
+  }
 }
 
-.cta-button:active {
-  transform: translateY(0);
+/* ==========================================================================
+   11. GUIDE LAYOUT & STICKY TABLE OF CONTENTS
+   ========================================================================== */
+
+.guide-header {
+  padding: 1.5rem 0 1rem;
 }
 
-.cta-button:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
+.guide-reviewed {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: -0.25rem;
+  margin-bottom: 1.5rem;
+  text-transform: none;
 }
 
-/* --------------------------------------------------------------------------
-   14. COMPARISON TABLE
-   -------------------------------------------------------------------------- */
-.table-wrapper {
+.guide-layout {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 960px) {
+  .guide-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .guide-toc {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.1rem;
+  }
+
+  .guide-toc h2 {
+    font-size: 0.95rem;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    text-transform: none;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .guide-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .guide-toc li {
+    margin-bottom: 0.45rem;
+  }
+
+  .guide-toc a {
+    display: inline-block;
+    font-size: 0.88rem;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.4;
+    padding: 0.25rem 0;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .guide-toc a:hover {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 959px) {
+  .guide-toc {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ==========================================================================
+   12. COMPARISON TABLES (SCROLLABLE ON MOBILE)
+   ========================================================================== */
+
+.table-responsive {
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: 2rem;
+  margin: 1.5rem 0 2rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
 }
 
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
-  min-width: 540px;
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+  min-width: 580px;
 }
 
 .comparison-table th,
 .comparison-table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
 
 .comparison-table th {
-  background: var(--bg);
+  background-color: var(--bg);
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  white-space: nowrap;
+  color: var(--text);
+  text-transform: none;
 }
 
-.comparison-table tbody tr:nth-child(even) {
-  background: var(--bg);
-}
-
-.comparison-table tbody tr:last-child td {
+.comparison-table tr:last-child td {
   border-bottom: none;
 }
 
 .comparison-table tbody tr:hover {
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  background-color: var(--bg);
 }
 
-/* --------------------------------------------------------------------------
-   15. FAQ / ACCORDION
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   13. ACCORDIONS / FAQS
+   ========================================================================== */
+
 .faq-list {
-  margin-bottom: 2rem;
+  margin: 1.5rem 0 2rem;
+  max-width: none;
 }
 
 .faq-item {
-  margin-bottom: 1rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  margin-bottom: 0.65rem;
   overflow: hidden;
-  background: var(--surface);
 }
 
-.faq-item details {
-  padding: 0;
-}
-
-.faq-item details summary {
-  font-weight: 700;
-  cursor: pointer;
+.faq-item summary {
   padding: 1rem 1.25rem;
+  min-height: 44px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
   list-style: none;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
   user-select: none;
-  transition: background var(--transition-speed) ease;
-  line-height: 1.4;
+  text-transform: none;
 }
 
-.faq-item details summary::-webkit-details-marker {
+.faq-item summary::-webkit-details-marker {
   display: none;
 }
 
-.faq-item details summary::after {
+.faq-item summary::after {
   content: "+";
-  font-size: 1.2rem;
-  font-weight: 400;
-  flex-shrink: 0;
+  font-family: monospace;
+  font-size: 1.25rem;
   color: var(--text-muted);
-  transition: transform var(--transition-speed) ease;
+  font-weight: 700;
+  margin-left: 1rem;
 }
 
-.faq-item details[open] summary::after {
-  transform: rotate(45deg);
+.faq-item[open] summary::after {
+  content: "-";
 }
 
-.faq-item details summary:hover {
-  background: var(--bg);
-}
-
-.faq-item details summary:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: -3px;
-}
-
-.faq-item .faq-answer {
-  padding: 0 1.25rem 1rem;
-  color: var(--text-muted);
+.faq-answer {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--text);
   font-size: 0.95rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-.faq-item .faq-answer p + p {
-  margin-top: 0.75rem;
+.faq-answer p:last-child {
+  margin-bottom: 0;
 }
 
-/* --------------------------------------------------------------------------
-   16. BREADCRUMB NAV
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   14. TRUST & CREDIBILITY SECTION
+   ========================================================================== */
+
+.trust-section {
+  padding: 2.5rem 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.trust-item {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.trust-item h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  text-transform: none;
+}
+
+.trust-item p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   15. BREADCRUMBS
+   ========================================================================== */
+
 .breadcrumb {
-  margin-bottom: 1.5rem;
-  font-size: 0.875rem;
+  padding: 1rem 0 0.5rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
 }
 
 .breadcrumb ol {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.breadcrumb li {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .breadcrumb li + li::before {
   content: "/";
-  color: var(--text-muted);
+  padding-right: 0.5rem;
+  color: var(--border-strong);
 }
 
 .breadcrumb a {
@@ -640,290 +1082,169 @@ ol {
 }
 
 .breadcrumb a:hover {
-  color: var(--accent);
+  color: var(--teal);
   text-decoration: underline;
 }
 
 .breadcrumb [aria-current="page"] {
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* --------------------------------------------------------------------------
-   17. GUIDE / ARTICLE CONTENT
-   -------------------------------------------------------------------------- */
-.article-content {
-  max-width: 720px;
-  margin: 0 auto;
+/* ==========================================================================
+   16. FOOTER (DEEP FELT COLOR)
+   ========================================================================== */
+
+.site-footer {
+  margin-top: auto;
+  background-color: var(--felt);
+  color: #D2DFEB;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem 0 2.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
-.article-content h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
-}
-
-.article-content h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.article-content p {
-  margin-bottom: 1rem;
-}
-
-.article-content ul,
-.article-content ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.article-content ul {
-  list-style: disc;
-}
-
-.article-content ol {
-  list-style: decimal;
-}
-
-.article-content li {
-  margin-bottom: 0.4rem;
-}
-
-/* --------------------------------------------------------------------------
-   18. CATEGORY GRID (Homepage)
-   -------------------------------------------------------------------------- */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.category-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  text-decoration: none;
-  color: var(--text);
-  border: 1px solid var(--border);
-  transition: border-color var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease,
-              transform var(--transition-speed) ease;
+.footer-inner {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.75rem;
 }
 
-.category-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-  color: var(--text);
+.footer-disclosure {
+  max-width: var(--max-text-width);
+  color: #B9CBDC;
+  font-size: 0.88rem;
+  margin-bottom: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: #FFFFFF;
   text-decoration: none;
+  font-weight: 600;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.category-card:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.category-card .category-icon {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-.category-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.category-card p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-/* --------------------------------------------------------------------------
-   19. SECTION HEADINGS
-   -------------------------------------------------------------------------- */
-.section-title {
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-}
-
-section {
-  padding: 2.5rem 0;
-}
-
-/* --------------------------------------------------------------------------
-   20. FOOTER
-   -------------------------------------------------------------------------- */
-.site-footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 2rem 1rem;
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin-top: 3rem;
-}
-
-.site-footer a {
-  color: var(--text-muted);
+.footer-links a:hover {
+  color: var(--amber);
   text-decoration: underline;
 }
 
-.site-footer a:hover {
-  color: var(--accent);
+.footer-copyright {
+  color: #8CA3B8;
+  font-size: 0.84rem;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.25rem;
 }
 
-.site-footer .footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.5rem;
-  margin-bottom: 1rem;
+.footer-copyright a {
+  color: #B9CBDC;
 }
 
-.site-footer .footer-copy {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
+/* ==========================================================================
+   17. FORMS & CONTACT
+   ========================================================================== */
+
+.contact-form {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem 0;
 }
 
-/* --------------------------------------------------------------------------
-   21. BACK TO TOP BUTTON
-   -------------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  text-transform: none;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease;
+  min-height: 44px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 1px;
+  border-color: var(--teal);
+}
+
+/* Back to top button */
 #back-to-top {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
-  z-index: 90;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.1rem;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  min-height: 44px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
+  z-index: 90;
   display: none;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background var(--transition-speed) ease,
-              transform var(--transition-speed) ease;
-  line-height: 1;
+  box-shadow: none;
+  text-transform: none;
 }
 
 #back-to-top.visible {
-  display: flex;
+  display: block;
 }
 
 #back-to-top:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
+  background-color: var(--felt);
+  color: #FFFFFF;
 }
 
-#back-to-top:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
+/* ==========================================================================
+   18. PRINT STYLES
+   ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   22. SINGLE PRODUCT CARD (detail page variant)
-   -------------------------------------------------------------------------- */
-.single-product-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--card-shadow);
-  border: 1px solid var(--border);
-  margin-bottom: 2rem;
-  max-width: 720px;
-}
-
-.single-product-card img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  margin-bottom: 1.25rem;
-}
-
-/* --------------------------------------------------------------------------
-   23. UTILITY CLASSES
-   -------------------------------------------------------------------------- */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
-.mb-1 { margin-bottom: 0.5rem; }
-.mb-2 { margin-bottom: 1rem; }
-.mb-3 { margin-bottom: 1.5rem; }
-
-.text-center { text-align: center; }
-
-/* --------------------------------------------------------------------------
-   24. GLOBAL FOCUS STYLES
-   -------------------------------------------------------------------------- */
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* Remove focus ring for mouse users */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* --------------------------------------------------------------------------
-   25. PRINT STYLES
-   -------------------------------------------------------------------------- */
 @media print {
+  body {
+    background: white;
+    color: black;
+  }
   .site-header,
   .site-footer,
+  .disclosure-strip,
+  .nav-toggle,
   #back-to-top,
   .cta-button {
     display: none !important;
-  }
-
-  body {
-    color: #000;
-    background: #fff;
-  }
-
-  a[href]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.8em;
-    color: #555;
   }
 }
