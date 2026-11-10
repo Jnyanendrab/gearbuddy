@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% if pageTitle %}{{ pageTitle }}{% elif title %}{% if "GearBuddy" in title or "–" in title or "|" in title %}{{ title }}{% else %}{{ title }} | {{ site.name }}{% endif %}{% else %}{{ site.name }} – {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ description | default(site.tagline) }}">
+  {% if robots %}<meta name="robots" content="{{ robots }}">{% endif %}
+  {% if canonical %}<link rel="canonical" href="{{ canonical }}">
+  {% elif permalink == "/index.html" or page.url == "/" %}<link rel="canonical" href="{{ site.url }}/">
+  {% elif permalink != "/404.html" and page.url != "/404.html" %}<link rel="canonical" href="{{ site.url }}{{ permalink | default(page.url) }}">{% endif %}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="{{ ogType | default('website') }}">
+  <meta property="og:title" content="{{ title | default(site.name) }}">
+  <meta property="og:description" content="{{ description | default(site.tagline) }}">
+  <meta property="og:url" content="{% if permalink == '/index.html' or page.url == '/' %}{{ site.url }}/{% else %}{{ site.url }}{{ permalink | default(page.url) }}{% endif %}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  {% if ogType == "article" %}
+  <meta property="article:published_time" content="{{ datePublished | default('2026-11-01') }}">
+  <meta property="article:modified_time" content="{{ dateModified | default('2026-11-10') }}">
+  {% endif %}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="{{ twitterCard | default('summary') }}">
+  <meta name="twitter:title" content="{{ title | default(site.name) }}">
+  <meta name="twitter:description" content="{{ description | default(site.tagline) }}">
+  <meta name="twitter:url" content="{% if permalink == '/index.html' or page.url == '/' %}{{ site.url }}/{% else %}{{ site.url }}{{ permalink | default(page.url) }}{% endif %}">
+
+  {% if googleSiteVerification %}
+  <meta name="google-site-verification" content="{{ googleSiteVerification }}">
+  {% elif permalink == "/" or permalink == "/index.html" or page.url == "/" %}
+  <meta name="google-site-verification" content="REPLACE_WITH_GSC_CODE">
+  {% endif %}
+
+  <link rel="preload" href="/fonts/bricolage-grotesque-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=2">
+
+  {% if schemaType == "Organization" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/images/logo.svg",
+    "description": "Independent desk gear guides for ergonomic workspaces"
+  }
+  </script>
+  {% elif schemaType == "Article" or ogType == "article" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ headline | default(title) }}",
+    "url": "{{ site.url }}{{ permalink | default(page.url) }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.name }}",
+      "url": "{{ site.url }}"
+    },
+    "datePublished": "{{ datePublished | default('2026-11-01') }}",
+    "dateModified": "{{ dateModified | default('2026-11-10') }}"
+  }
+  </script>
+  {% endif %}
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="site-logo" aria-label="GearBuddy home">{{ site.name }}</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        Menu
+      </button>
+      <nav id="primary-nav" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="/guides/best-ergonomic-mouse.html" class="nav-link{% if '/guides/' in (permalink or page.url) %} active{% endif %}">Guides</a></li>
+          <li><a href="/deals/black-friday-desk.html" class="nav-link{% if '/deals/' in (permalink or page.url) %} active{% endif %}">Deals</a></li>
+          <li><a href="/about.html" class="nav-link{% if (permalink or page.url) == '/about.html' %} active{% endif %}">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Disclosure Strip -->
+  {% if hasDisclosure !== false %}
+  <aside class="disclosure-strip" aria-label="Affiliate disclosure" role="note">
+    <div class="container disclosure-inner">
+      <span class="disclosure-info-mark" aria-hidden="true">i</span>
+      <p>{{ site.disclosure }}</p>
+    </div>
+  </aside>
+  {% endif %}
+
+  {{ content | safe }}
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-disclosure">{{ site.disclosure }} {{ site.name }} is an independent review site, not a store.</p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/legal.html">Legal and privacy</a></li>
+          <li><a href="/legal.html#affiliate-disclosure">Affiliate disclosure</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copyright">&copy; 2026 {{ site.name }}. All rights reserved. <a href="/legal.html">Legal</a></p>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics: REPLACE_WITH_CLOUDFLARE_ANALYTICS_SNIPPET -->
+  <script src="/js/main.js?v=2" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+media:
+  input: src/images
+  output: /images
+
+content:
+  - name: products
+    label: Products
+    type: file
+    path: src/_data/products.json
+    description: "Manage desk setup products, specifications, and affiliate links"
+    list: true
+    fields:
+      - name: id
+        label: Product ID
+        type: string
+        description: "Unique slug identifier (e.g. logitech-lift)"
+      - name: name
+        label: Product name
+        type: string
+      - name: category
+        label: Category
+        type: string
+      - name: bestFor
+        label: Best for
+        type: string
+        description: "One-line summary of ideal buyer"
+      - name: pros
+        label: Pros
+        type: list
+        description: "List of key advantages"
+      - name: cons
+        label: Cons
+        type: list
+        description: "List of drawbacks or limitations"
+      - name: image
+        label: Product image
+        type: image
+      - name: affiliateUrl
+        label: Amazon affiliate URL
+        type: string
+        description: "Paste your Amazon Associates link here"
+
+  - name: site
+    label: Site settings
+    type: file
+    path: src/_data/site.json
+    description: "Global website configuration and disclosure text"
+    fields:
+      - name: name
+        label: Site name
+        type: string
+      - name: url
+        label: Site URL
+        type: string
+        description: "Canonical site origin (e.g. https://gearbuddy.shop)"
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: contactEmail
+        label: Contact email
+        type: string
+      - name: disclosure
+        label: FTC affiliate disclosure
+        type: text
+        description: "Visible above-the-fold affiliate disclosure text"
+
+  - name: guides
+    label: Guides
+    type: collection
+    path: src/guides
+    description: "In-depth buyer guides and product comparisons"
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: lastReviewed
+        label: Last reviewed date
+        type: string
+        description: "Month and year (e.g. November 2026)"
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: deals
+    label: Deals
+    type: file
+    path: src/deals/black-friday-desk.md
+    description: "Black Friday & Cyber Monday deals hub and watchlist"
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: updates
+        label: Updates
+        type: list
+        description: "Log of recent updates with date and note"
+        fields:
+          - name: date
+            label: Date
+            type: string
+          - name: text
+            label: Update note
+            type: string
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: pages
+    label: Pages
+    type: collection
+    path: src
+    description: "Standard information pages (About, Contact, Legal)"
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: body
+        label: Content
+        type: rich-text
+
