@@ -1,0 +1,255 @@
+---
+layout: base.njk
+title: GearBuddy – Ergonomic Desk Setup Guides
+description: Independent desk gear guides for ergonomic mice, monitor lights, GaN chargers, keyboards and cable management. No fluff, just research.
+permalink: /index.html
+schemaType: Organization
+priority: "1.0"
+changefreq: weekly
+---
+
+<main id="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="hero-badge">Independent desk gear guides</span>
+        <h1 class="hero-title">A better desk, one sore spot at a time.</h1>
+        <p class="hero-intro">GearBuddy is an independent research-based guide site — not a store. We compile information from manufacturer specifications and manufacturer specifications and publicly available user reviews to help you find the right ergonomic gear for your workspace. We earn a small commission if you buy through our links, at no extra cost to you.</p>
+        <div class="hero-actions">
+          <a href="#fixes" class="cta-button">Find your fix</a>
+        </div>
+      </div>
+
+      <div class="hero-illustration" aria-hidden="true">
+        <!-- Top-down flat desk illustration (mat, mouse, keyboard, monitor light bar) -->
+        <svg class="desk-svg" viewBox="0 0 520 380" width="520" height="380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="deskMatGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1F3347" />
+              <stop offset="100%" stop-color="#182837" />
+            </linearGradient>
+            <linearGradient id="amberLightGlow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F2B33D" stop-opacity="0.45" />
+              <stop offset="55%" stop-color="#F2B33D" stop-opacity="0.15" />
+              <stop offset="100%" stop-color="#F2B33D" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+
+          <!-- Desk Mat (Felt) -->
+          <rect x="40" y="80" width="440" height="265" rx="10" fill="url(#deskMatGrad)" stroke="#2C435A" stroke-width="2" />
+          <!-- Mat border stitching -->
+          <rect x="46" y="86" width="428" height="253" rx="7" fill="none" stroke="#253A4E" stroke-width="1" stroke-dasharray="4 3" />
+
+          <!-- Monitor Bezel & Stand (Top) -->
+          <rect x="195" y="22" width="130" height="22" rx="4" fill="#14202B" stroke="#2B3D4F" stroke-width="1.5" />
+          <rect x="250" y="44" width="20" height="30" fill="#1F3040" />
+          <rect x="75" y="10" width="370" height="14" rx="3" fill="#121A22" stroke="#2A3846" stroke-width="1.5" />
+
+          <!-- Amber Light Bar Glow (Fades in once on load, disabled on reduced motion) -->
+          <polygon class="desk-light-glow" points="160,24 360,24 450,285 70,285" fill="url(#amberLightGlow)" />
+
+          <!-- Monitor Light Bar -->
+          <rect x="145" y="6" width="230" height="11" rx="3" fill="#0B131A" stroke="#253545" stroke-width="1" />
+          <rect x="160" y="14" width="200" height="3" fill="#F2B33D" />
+
+          <!-- Low-Profile Mechanical Keyboard -->
+          <rect x="80" y="130" width="240" height="110" rx="6" fill="#14202B" stroke="#33475B" stroke-width="1.5" />
+          <!-- Key rows -->
+          <g fill="#24374A" stroke="#162330" stroke-width="1">
+            <!-- Number row -->
+            <rect x="88" y="138" width="18" height="16" rx="2" />
+            <rect x="109" y="138" width="18" height="16" rx="2" />
+            <rect x="130" y="138" width="18" height="16" rx="2" />
+            <rect x="151" y="138" width="18" height="16" rx="2" />
+            <rect x="172" y="138" width="18" height="16" rx="2" />
+            <rect x="193" y="138" width="18" height="16" rx="2" />
+            <rect x="214" y="138" width="18" height="16" rx="2" />
+            <rect x="235" y="138" width="18" height="16" rx="2" />
+            <rect x="256" y="138" width="18" height="16" rx="2" />
+            <rect x="277" y="138" width="18" height="16" rx="2" />
+            <rect x="298" y="138" width="14" height="16" rx="2" fill="#0B6E75" />
+            <!-- Alpha row 1 -->
+            <rect x="88" y="157" width="22" height="16" rx="2" />
+            <rect x="113" y="157" width="18" height="16" rx="2" />
+            <rect x="134" y="157" width="18" height="16" rx="2" />
+            <rect x="155" y="157" width="18" height="16" rx="2" />
+            <rect x="176" y="157" width="18" height="16" rx="2" />
+            <rect x="197" y="157" width="18" height="16" rx="2" />
+            <rect x="218" y="157" width="18" height="16" rx="2" />
+            <rect x="239" y="157" width="18" height="16" rx="2" />
+            <rect x="260" y="157" width="18" height="16" rx="2" />
+            <rect x="281" y="157" width="31" height="16" rx="2" />
+            <!-- Alpha row 2 -->
+            <rect x="88" y="176" width="26" height="16" rx="2" />
+            <rect x="117" y="176" width="18" height="16" rx="2" />
+            <rect x="138" y="176" width="18" height="16" rx="2" />
+            <rect x="159" y="176" width="18" height="16" rx="2" />
+            <rect x="180" y="176" width="18" height="16" rx="2" />
+            <rect x="201" y="176" width="18" height="16" rx="2" />
+            <rect x="222" y="176" width="18" height="16" rx="2" />
+            <rect x="243" y="176" width="18" height="16" rx="2" />
+            <rect x="264" y="176" width="18" height="16" rx="2" />
+            <rect x="285" y="176" width="27" height="16" rx="2" fill="#F2B33D" />
+            <!-- Bottom / Spacebar row -->
+            <rect x="88" y="195" width="22" height="16" rx="2" />
+            <rect x="113" y="195" width="20" height="16" rx="2" />
+            <rect x="136" y="195" width="20" height="16" rx="2" />
+            <rect x="159" y="195" width="95" height="16" rx="2" fill="#2B3F54" />
+            <rect x="257" y="195" width="20" height="16" rx="2" />
+            <rect x="280" y="195" width="32" height="16" rx="2" />
+          </g>
+
+          <!-- Ergonomic Vertical Mouse -->
+          <g transform="translate(355, 140)">
+            <!-- Mouse Body (Vertical profile seen from top) -->
+            <path d="M 28 8 C 48 8 68 28 72 58 C 74 80 62 104 42 108 C 22 110 8 92 6 70 C 4 48 12 8 28 8 Z" fill="#14202B" stroke="#33475B" stroke-width="1.5" />
+            <!-- Thumb rest contour -->
+            <path d="M 12 40 C 4 52 4 72 16 82" stroke="#253545" stroke-width="2" fill="none" />
+            <!-- Scroll Wheel in Teal -->
+            <rect x="36" y="26" width="6" height="20" rx="3" fill="#0B6E75" stroke="#4FB8C0" stroke-width="0.75" />
+            <!-- Grip seam in subtle amber -->
+            <path d="M 40 48 C 42 66 40 82 36 96" stroke="#F2B33D" stroke-width="1.25" stroke-linecap="round" fill="none" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ruler Divider -->
+  <div class="container">
+    <div class="ruler-divider" aria-hidden="true"></div>
+  </div>
+
+  <!-- Problem-Based Guide List -->
+  <section class="problem-section" id="fixes">
+    <div class="container">
+      <h2 class="section-title">Find your fix</h2>
+      <p class="section-intro">Start with what hurts or annoys you most during the workday. Each guide breaks down the core specs, trade-offs, and community-recommended solutions.</p>
+
+      <div class="problem-list">
+        <a href="/guides/best-ergonomic-mouse.html" class="problem-row">
+          <div class="problem-meta">
+            <h3 class="problem-title">Sore wrist</h3>
+            <p class="problem-desc">Vertical mice that align your forearm in a handshake position to relieve wrist strain and carpal pressure.</p>
+          </div>
+          <span class="problem-action">View guide</span>
+        </a>
+
+        <a href="/guides/best-monitor-light-bar.html" class="problem-row">
+          <div class="problem-meta">
+            <h3 class="problem-title">Screen glare</h3>
+            <p class="problem-desc">Asymmetric monitor-mounted light bars that illuminate your desk surface without washing out your display.</p>
+          </div>
+          <span class="problem-action">View guide</span>
+        </a>
+
+        <a href="/guides/best-gan-power-banks.html" class="problem-row">
+          <div class="problem-meta">
+            <h3 class="problem-title">Dead battery</h3>
+            <p class="problem-desc">Cool-running GaN desktop chargers and laptop-grade portable power banks to keep all your devices fueled.</p>
+          </div>
+          <span class="problem-action">View guide</span>
+        </a>
+
+        <a href="/guides/budget-mechanical-kb.html" class="problem-row">
+          <div class="problem-meta">
+            <h3 class="problem-title">Cramped typing</h3>
+            <p class="problem-desc">Slim low-profile mechanical keyboards that provide crisp tactile feedback while keeping desktop height flat.</p>
+          </div>
+          <span class="problem-action">View guide</span>
+        </a>
+
+        <a href="/guides/cable-management-tray.html" class="problem-row">
+          <div class="problem-meta">
+            <h3 class="problem-title">Cable mess</h3>
+            <p class="problem-desc">Clamp-on under-desk raceway trays and monitor arm routing channels that lift power strips and wires off the floor.</p>
+          </div>
+          <span class="problem-action">View guide</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ruler Divider -->
+  <div class="container">
+    <div class="ruler-divider" aria-hidden="true"></div>
+  </div>
+
+  <!-- Top Picks / Featured Products -->
+  <section class="featured-section">
+    <div class="container">
+      <h2 class="section-title">Top picks this month</h2>
+      <p class="section-intro">Notable workspace upgrades based on manufacturer specifications and aggregated public user reviews.</p>
+
+      {% productGrid "logitech-lift,benq-screenbar-halo,keychron-k3", "Featured product picks" %}
+    </div>
+  </section>
+
+  <!-- Ruler Divider -->
+  <div class="container">
+    <div class="ruler-divider" aria-hidden="true"></div>
+  </div>
+
+  <!-- Why Trust Us / How We Choose -->
+  <section class="trust-section">
+    <div class="container">
+      <h2 class="section-title">How we choose our picks</h2>
+      <div class="trust-grid">
+
+        <div class="trust-item">
+          <h3>Manufacturer specifications</h3>
+          <p>We evaluate verified specs — dimensions, materials, connectivity protocols, sensor resolutions, and rated power outputs for an objective baseline.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3>Aggregated user reviews</h3>
+          <p>We read verified-purchase Amazon reviews to identify recurring patterns in everyday reliability, ease of setup, and long-term satisfaction.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3>Community feedback</h3>
+          <p>We check community discussions on Reddit forums like r/MechanicalKeyboards, r/ErgoMechKeyboards, and r/buildapc for long-term sentiment.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3>Our selection criteria</h3>
+          <p>We prioritize ergonomic design principles, strong build quality reputation, good value, high user satisfaction signals, and desk compatibility.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3>100% research-based guides</h3>
+          <p>GearBuddy guides are compiled from manufacturer specs and public user reviews. We do not sell products or receive sponsored review units.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3>Affiliate transparency</h3>
+          <p>We earn a commission from Amazon if you purchase through our links — at zero extra cost to you. Affiliate relationships never dictate featured gear.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Ruler Divider -->
+  <div class="container">
+    <div class="ruler-divider" aria-hidden="true"></div>
+  </div>
+
+  <!-- Internal Links Section -->
+  <section class="all-guides-section">
+    <div class="container">
+      <h2 class="section-title">All desk guides</h2>
+      <ul class="all-guides-list">
+        <li><a href="/guides/best-ergonomic-mouse.html">Best ergonomic mouse (2026)</a> — Vertical, trackball, and contoured options</li>
+        <li><a href="/guides/best-monitor-light-bar.html">Best monitor light bar (2026)</a> — Glare-free LED bars for every budget</li>
+        <li><a href="/guides/best-gan-power-banks.html">Best GaN power banks and chargers (2026)</a> — Fast multi-device charging</li>
+        <li><a href="/guides/budget-mechanical-kb.html">Budget mechanical keyboards (2026)</a> — Low-profile and compact layouts</li>
+        <li><a href="/guides/cable-management-tray.html">Cable management tray guide (2026)</a> — Under-desk trays and raceway kits</li>
+        <li><a href="/deals/black-friday-desk.html">Black Friday desk deals (2026)</a> — Genuine holiday discounts tracker</li>
+      </ul>
+    </div>
+  </section>
+
+</main>

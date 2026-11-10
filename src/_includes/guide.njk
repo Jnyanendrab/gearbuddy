@@ -1,0 +1,39 @@
+---
+layout: base.njk
+ogType: article
+twitterCard: summary
+schemaType: Article
+---
+<main id="main-content">
+  <nav class="breadcrumb container" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/best-ergonomic-mouse.html">Guides</a></li>
+      <li aria-current="page">{{ breadcrumbTitle | default(title) }}</li>
+    </ol>
+  </nav>
+
+  <article class="guide-article">
+    <h1>{{ headline | default(title) }}</h1>
+    <p class="guide-reviewed">Last reviewed: {{ lastReviewed | default("November 2026") }}</p>
+
+    <div class="container guide-layout">
+      {% if toc %}
+      <details class="guide-toc" aria-label="Table of contents">
+        <summary>On this page</summary>
+        <div class="guide-toc-content">
+          <h2 class="guide-toc-heading-desktop">On this page</h2>
+          <ul>
+            {% for item in toc %}
+            <li><a href="{{ item.href }}">{{ item.text }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </details>
+      {% endif %}
+      <div class="guide-main">
+        {{ content | safe }}
+      </div>
+    </div>
+  </article>
+</main>
