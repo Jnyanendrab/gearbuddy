@@ -230,3 +230,4 @@ toc:
   <li><a href="/guides/cable-management-tray.html">Best Under-Desk Cable Management Tray (2026)</a></li>
   <li><a href="/deals/black-friday-desk.html">Black Friday Desk Deals</a></li>
 </ul>
+
